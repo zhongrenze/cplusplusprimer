@@ -95,9 +95,68 @@ vector<int> v6(v4.begin(),b4.end());//初始化为迭代去范围中的元素的拷贝。
 >当传递迭代器参数来拷贝一个范围就不要求容器相同，也不要求元素类型相同，只要
 >能转换为要初始化的容器的元素类型就可以。
 
+## 练习9.13
+>list<int> 初始化vector<double>容器和元素都不同，但元素可以相互转换，可以用迭代器区间。
+>vector<int>初始化vector<double>也是一个道理。
+```c++
+list<int> ilist(5,3);
+vector<int> ivec(5,3);
+vector<double> dvec1(ilist.begin(),ilist.end());
+vector<double> dvec2(ivec.begin().ivec.end());
+```
 
+## 练习9.15
+```c++
+bool isEqual(vector<int> lh,vector<int> rh)
+{
+	return lh==rh;
+}
+```
 
+## 练习9.16
+```c++
+bool isEqual(list<int> lh,vector<int> rh)
+{
+    if(lh.size()!=rh.size())
+        return false;
+	int i=0;
+   	for(int lhval:lh){
+    	if(lhval!=rh[i])
+        	return false;
+        ++i;
+    }
+    return true;
+}
+```
+## 练习9.17
+>1.容器相同且保存相同的数据类型
+>2.保存的元素类型也定义了相同的比较运算符号（小于号）
 
+## 练习9.21
+>vector虽然不支持```push_front```但是insert到任何位置都是合法的，只不过不在末尾的话可能会很慢。
+
+## 练习9.22
+>1.insert动作造成mid iterator 可能失效。
+>2.循环没有改变iterator指向，造成无限循环。
+```c++
+vector<int>::iterator iter=iv.begin()+ iv.size()/2;
+while(iter != iv.rend())
+{
+	if(*iter != some_val)
+    	iter=iv.insert(iter, 2 * some_val);
+    else
+    	--iter;
+}
+```
+
+## 练习9.23
+>都是同一个值。
+>c.size()==1  *c.begin()  equal to c.front() 、c.back() 、*(--c.end())
+
+## 练习9.24
+>```cl /EHsc ex9_24.cpp``` 无法捕获前三种的异常。out_of_range可以捕获。
+>```cl /EHa ex9_24.cpp``` 都可以捕获。
+>[异常处理模型](https://msdn.microsoft.com/zh-cn/library/1deeycx5.aspx)
 
 
 
